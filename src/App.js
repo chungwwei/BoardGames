@@ -24,7 +24,7 @@ class App extends Component {
       moves: 0,
       time: 0,
       game: new Game15(4),
-      tabValue: 2
+      tabValue: 0
     }
 
     let cellVals = this.state.game.board.cellVals
@@ -111,8 +111,6 @@ class App extends Component {
       
       {/* App_game */}
       {game}
-
-      
     </div>
   );
   }

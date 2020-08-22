@@ -65,6 +65,7 @@ class Game2048Component extends Component {
     let seg_3= vals.slice(8, 12)
     let seg_4= vals.slice(12, 16)
 
+
     return(
     <div position="center">
       {/* <header className="App-header">
@@ -86,7 +87,7 @@ class Game2048Component extends Component {
         <div className="grid_container">
           <div className="grid_row">
             {seg_1.map(item => (
-              <div className="grid_cell">
+              <div className={item !== " " ? "grid_cell" : "grid_cell_empty"}>
                 <text>{item}</text>
               </div>
             ))}
@@ -95,7 +96,7 @@ class Game2048Component extends Component {
 
           <div className="grid_row">
            {seg_2.map(item => (
-              <div className="grid_cell">
+              <div className={item !== " " ? "grid_cell" : "grid_cell_empty"}>
                 <text>{item}</text>
               </div>
             ))}
@@ -103,7 +104,7 @@ class Game2048Component extends Component {
 
           <div className="grid_row">
             {seg_3.map(item => (
-              <div className="grid_cell">
+              <div className={item !== " " ? "grid_cell" : "grid_cell_empty"}>
                 <text>{item}</text>
               </div>
             ))}
@@ -111,24 +112,12 @@ class Game2048Component extends Component {
 
           <div className="grid_row">
             {seg_4.map(item => (
-              <div className="grid_cell">
+              <div className={item !== " " ? "grid_cell" : "grid_cell_empty"}>
                 <text>{item}</text>
               </div>
             ))}
           </div>
-
-          
         </div>
-
-        {/* <div className="board center">
-          {
-            this.state.vals.map(item => (
-              <div className="cell">
-                <text>{item}</text>
-              </div>
-            ))
-          }
-        </div> */}
       </div>
 
       <button onClick={() => this.move('LEFT') } > left </button>

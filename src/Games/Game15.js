@@ -35,7 +35,7 @@ export class Game15 {
         console.log('cell: ' + neighborCell)
         
         // No cell to move
-        if (neighborCell === null) return 
+        if (neighborCell === null) return false
 
         let cellVals = this.board.cellVals
         cellVals[emptyCell] = cellVals[neighborCell]
