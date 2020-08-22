@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Button from '@material-ui/core/Button'
+import {Button, Toolbar, IconButton, Typography} from '@material-ui/core/'
+import {Tabs, Tab, TabPanel} from '@material-ui/core/'
+import { makeStyles } from '@material-ui/core/styles';
 import { GameBoard } from "./board/board.js";
 import { Game2048 } from './Games/Game2048';
 import { Game15 } from './Games/Game15';
 import Game2048Component from './components/Game2048Component';
 import Connect4Component from './components/Connect4Component';
+import { AppBar } from '@material-ui/core';
+import Game15Component from './components/Game15Component';
+
+
 class App extends Component {
 
   constructor(props) {
@@ -18,7 +23,8 @@ class App extends Component {
       vals: arr,
       moves: 0,
       time: 0,
-      game: new Game15(4)
+      game: new Game15(4),
+      tabValue: 2
     }
 
     let cellVals = this.state.game.board.cellVals
@@ -38,7 +44,6 @@ class App extends Component {
       game: newGame,
       vals: this.state.vals
     })
-
   }
 
   updateBoardVals(board) {
@@ -64,54 +69,50 @@ class App extends Component {
     this.refreshBoard()
   }
 
+  handleTabChange = (event, newValue) => {
+    this.setState({
+      tabValue: newValue
+    })
+  }
+
   render () {
+    let game;
+    if (this.state.tabValue === 1)
+      game = <Game2048Component/>
+    else if (this.state.tabValue === 2)
+      game = <Connect4Component/>
+    else if (this.state.tabValue === 0)
+      game = <Game15Component/>
 
     return(
     <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
+      {/* App_bar */}
+      <div className="app_topbar">
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6">
+              Board Games
+            </Typography>
 
-      <div className="container">
-        <h1>Game15</h1>
-        <div className="board center">
-          {
-            this.state.vals.map(item => (
-              <div className="cell">
-                <text>{item}</text>
-              </div>
-            ))
-          }
-        </div>
+            <Tabs
+              value={this.state.tabValue}
+              onChange={this.handleTabChange}
+              indicatorColor = 'primary'
+              textcolor = 'primary'
+              centered
+            >
+              <Tab label='Game of 15' />
+              <Tab label='Game of 2048' />
+              <Tab label='Connect 4' />
+            </Tabs>
+          </Toolbar>
+        </AppBar>
       </div>
+      
+      {/* App_game */}
+      {game}
 
-      <button onClick={() => this.move('LEFT') } > left </button>
-      <button onClick={() => this.move('RIGHT') } > right </button>
-      <button onClick={() => this.move('UP') } > up </button>
-      <button onClick={() => this.move('DOWN') } > down </button>
-
-      <Button variant="contained" color="primary">
-        Start
-      </Button>
-
-      <Button onClick={() => this.reset() } variant="contained" color="primary">
-        Reset
-      </Button>
-
-      <Game2048Component></Game2048Component>
-      <Connect4Component></Connect4Component>
-
+      
     </div>
   );
   }

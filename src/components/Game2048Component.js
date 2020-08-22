@@ -59,8 +59,14 @@ class Game2048Component extends Component {
 
   render () {
 
+    let vals = this.state.vals
+    let seg_1= vals.slice(0, 4)
+    let seg_2= vals.slice(4, 8)
+    let seg_3= vals.slice(8, 12)
+    let seg_4= vals.slice(12, 16)
+
     return(
-    <div>
+    <div position="center">
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -75,10 +81,46 @@ class Game2048Component extends Component {
           Learn React
         </a>
       </header> */}
+      <h1>Game2048</h1>
+      <div className="twoofoureight_game_container center">
+        <div className="grid_container">
+          <div className="grid_row">
+            {seg_1.map(item => (
+              <div className="grid_cell">
+                <text>{item}</text>
+              </div>
+            ))}
 
-      <div className="container">
-        <h1>Game2048</h1>
-        <div className="board center">
+          </div>
+
+          <div className="grid_row">
+           {seg_2.map(item => (
+              <div className="grid_cell">
+                <text>{item}</text>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid_row">
+            {seg_3.map(item => (
+              <div className="grid_cell">
+                <text>{item}</text>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid_row">
+            {seg_4.map(item => (
+              <div className="grid_cell">
+                <text>{item}</text>
+              </div>
+            ))}
+          </div>
+
+          
+        </div>
+
+        {/* <div className="board center">
           {
             this.state.vals.map(item => (
               <div className="cell">
@@ -86,7 +128,7 @@ class Game2048Component extends Component {
               </div>
             ))
           }
-        </div>
+        </div> */}
       </div>
 
       <button onClick={() => this.move('LEFT') } > left </button>

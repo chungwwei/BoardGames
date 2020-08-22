@@ -8,6 +8,8 @@ class Connect4Component extends Component {
   constructor(props) {
     super(props)
     let arr = []
+
+    // vals holds the list of cells
     this.state = {
       vals: arr,
       moves: 0,
@@ -44,8 +46,10 @@ class Connect4Component extends Component {
 //     }
 //   }
 
+
+
+
   refreshBoard() {
-    // this.updateBoardVals(this.state.game.board)
     this.setState({
       refresh: !this.state.refresh,
     })
@@ -56,6 +60,7 @@ class Connect4Component extends Component {
     console.log(col)
     // col is the cell
     this.state.game.processMove(col)
+    this.state.game.processAI()
     // this.state.game.processMove(direction)  
     this.refreshBoard()
   }
@@ -64,21 +69,6 @@ class Connect4Component extends Component {
 
     return(
     <div>
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-
       <div className="container">
         <h1>Connect4</h1>
         <div className="connect_four_board center">
