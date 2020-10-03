@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button'
 import { Game15 } from '../Games/Game15'
 import { Card, CardContent, Typography } from '@material-ui/core';
+import TimerComponent from './TimerComponent';
 
 class Game15Component extends Component {
 
@@ -15,7 +16,9 @@ class Game15Component extends Component {
       moves: 0,
       time: 0,
       game: new Game15(4),
-      moves: 0
+      moves: 0,
+      gameStart: false,
+      seconds: 0,
     }
 
     let cellVals = this.state.game.board.cellVals
@@ -57,8 +60,26 @@ class Game15Component extends Component {
     this.updateBoardVals(newGame.board)
     this.setState({
       game: newGame,
-      vals: this.state.vals
+      vals: this.state.vals,
+      moves: 0,
+      gameStart: false,
+      seconds: 0
     })
+    clearInterval(this.timer)
+  }
+
+  startGame() {
+    if (this.state.gameStart === true)
+      return
+    this.setState({
+      gameStart: true,
+      seconds: 0
+    })
+    this.timer = setInterval(
+      () => this.setState({
+        seconds: this.state.seconds + 1
+      }), 10)
+    
   }
 
   updateBoardVals(board) {
@@ -110,12 +131,13 @@ class Game15Component extends Component {
 
           <Card className="game_fifteen_card">
             <CardContent className="game_fifteen_cardcontent">
-              <Typography color="textSecondary">
+              <TimerComponent seconds={this.state.seconds} />
+              {/* <Typography color="textSecondary">
                 Time
               </Typography>
               <Typography color="textSecondary">
                 03:12
-              </Typography>
+              </Typography> */}
             </CardContent>
           </Card>
           <h1>Game of 15</h1>
@@ -161,7 +183,7 @@ class Game15Component extends Component {
         
         {/* buttons group */}
         <div className="game_fifteen_buttons">
-          <Button className="game_fifteen_button" variant="contained" color="primary">
+          <Button className="game_fifteen_button" onClick={() => this.startGame() } variant="contained" color="primary">
             Start
           </Button>
           <Button className="game_fifteen_button" onClick={() => this.reset() } variant="contained" color="primary">

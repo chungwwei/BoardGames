@@ -1,0 +1,14 @@
+.line {
+
+}
+
+
+.visited_div {
+    
+}
+
+@keyframes path_color {
+    from {background-color: #444444}
+    to {backgorund-color: #3faeb8}
+    
+}

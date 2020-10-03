@@ -10,6 +10,7 @@ import Game2048Component from './components/Game2048Component';
 import Connect4Component from './components/Connect4Component';
 import { AppBar } from '@material-ui/core';
 import Game15Component from './components/Game15Component';
+import AStarComponent from './components/AStarComponent';
 
 
 class App extends Component {
@@ -83,6 +84,8 @@ class App extends Component {
       game = <Connect4Component/>
     else if (this.state.tabValue === 0)
       game = <Game15Component/>
+    else if (this.state.tabValue === 3)
+      game = <AStarComponent/>
 
     return(
     <div className="App">
@@ -104,6 +107,7 @@ class App extends Component {
               <Tab label='Game of 15' />
               <Tab label='Game of 2048' />
               <Tab label='Connect 4' />
+              <Tab label='A*' />
             </Tabs>
           </Toolbar>
         </AppBar>

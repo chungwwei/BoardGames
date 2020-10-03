@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button'
-import { Game2048 } from '../Games/Game2048';
 import { Connect4 } from '../Games/Connect4';
 
 class Connect4Component extends Component {
